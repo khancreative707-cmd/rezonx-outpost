@@ -132,6 +132,29 @@ footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11
 .steamp{animation:steamup 1.8s infinite}
 @keyframes jit{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .astro-live{animation:jit .45s infinite}
+
+.vig{position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(115% 90% at 50% 38%,transparent 55%,rgba(4,6,16,.5) 100%)}
+#banner{position:absolute;top:10px;left:50%;transform:translate(-50%,-10px);opacity:0;transition:all .35s;z-index:8;background:linear-gradient(180deg,rgba(120,10,20,.92),rgba(90,6,14,.92));border:2px solid #ff4d4d;border-radius:10px;padding:9px 22px 8px;text-align:center;pointer-events:none;box-shadow:0 0 24px rgba(255,60,60,.35)}
+#banner.on{opacity:1;transform:translate(-50%,0)}
+#banner .stripes{display:block;height:4px;margin:-9px -22px 6px;background:repeating-linear-gradient(45deg,#ffb400 0 7px,#1a1a1a 7px 14px);border-radius:8px 8px 0 0;opacity:.85}
+#banner b{display:block;font-size:15px;letter-spacing:2px;color:#fff}
+#banner i{display:block;font-style:normal;font-size:11px;letter-spacing:1.5px;color:#ffd6d6;margin-top:2px}
+#obj{position:absolute;top:12px;left:12px;z-index:8;background:rgba(9,12,26,.75);border-left:3px solid #FFC93C;border-radius:10px;padding:8px 12px;pointer-events:none;backdrop-filter:blur(4px)}
+#obj .k{display:block;font-size:10px;letter-spacing:1.5px;color:#FFC93C;font-weight:800}
+#obj b{display:block;font-size:13px;color:#fff;margin-top:2px;max-width:170px;line-height:1.25}
+#mwrap{position:absolute;top:12px;right:12px;z-index:8;width:220px;display:flex;flex-direction:column;gap:7px;pointer-events:none}
+#mwrap .meter{flex:none;min-width:0;padding:8px 12px;background:rgba(9,12,26,.72);border:2px solid rgba(120,140,190,.35);border-radius:12px;backdrop-filter:blur(4px)}
+#dialog{position:absolute;left:12px;bottom:64px;z-index:8;display:flex;gap:10px;align-items:center;max-width:330px;background:rgba(9,12,26,.8);border:2px solid rgba(120,140,190,.35);border-radius:14px;padding:9px 12px;opacity:0;transform:translateY(6px);transition:all .3s;pointer-events:none;backdrop-filter:blur(4px)}
+#dialog.on{opacity:1;transform:none}
+#dialog .av{width:34px;height:34px;flex:none;border-radius:10px;background:rgba(61,214,245,.15);display:grid;place-items:center;font-size:17px}
+#dialog .dt b{display:block;font-size:10.5px;letter-spacing:1.2px;color:#3DD6F5}
+#dialog .dt i{display:block;font-style:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;color:#e8edff;line-height:1.35}
+#crewhud{position:absolute;left:12px;bottom:12px;z-index:8;display:flex;gap:6px;pointer-events:none}
+#crewhud .cw{flex:none;min-width:0;width:96px;padding:6px 8px;background:rgba(9,12,26,.72);border:2px solid rgba(120,140,190,.35);border-radius:12px;backdrop-filter:blur(4px);text-align:left}
+#crewhud .cw .r{display:none}
+#crewhud .cw .n{font-size:11px;margin-top:2px}
+#crewhud .cw.down{border-color:#ff6b6b}
+@media(max-width:640px){#mwrap{width:150px;top:8px;right:8px;gap:5px}#mwrap .meter{padding:5px 9px}#crewhud{left:8px;bottom:8px;gap:4px}#crewhud .cw{width:76px;padding:5px 7px}#obj{max-width:130px;padding:6px 9px}#dialog{max-width:220px;bottom:56px}#banner{padding:7px 14px 6px}#banner .stripes{margin:-7px -14px 5px}#banner b{font-size:12px}#banner i{font-size:9.5px}}
 </style></head><body><div class="stars"></div><div class="wrap">
 <!-- TITLE -->
 <section id="scr-title" class="scr active"><div class="kick">RezonX Elites · NASA Space Apps 2026</div>
@@ -177,12 +200,12 @@ footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11
 <g id="astro2"><circle cx="452" cy="270" r="12" fill="#fff" stroke="#d9c9b8" stroke-width="2"/><circle cx="452" cy="265" r="6" fill="#ffb0b0"/><rect x="446" y="280" width="12" height="16" rx="5" fill="#fff" stroke="#d9c9b8" stroke-width="2"/></g>
 <g id="astro3"><circle cx="680" cy="262" r="11" fill="#fff" stroke="#d9c9b8" stroke-width="2"/><circle cx="680" cy="258" r="5.5" fill="#b7f0c8"/><rect x="675" y="272" width="11" height="15" rx="5" fill="#fff" stroke="#d9c9b8" stroke-width="2"/></g>
 <g id="sun"><circle cx="618" cy="52" r="22" fill="#FFD27D"/><g stroke="#FFD27D" stroke-width="2.5" opacity=".7"><line x1="618" y1="18" x2="618" y2="4"/><line x1="618" y1="86" x2="618" y2="100"/><line x1="584" y1="52" x2="570" y2="52"/><line x1="652" y1="52" x2="666" y2="52"/><line x1="594" y1="28" x2="584" y2="18"/><line x1="642" y1="76" x2="652" y2="86"/><line x1="594" y1="76" x2="584" y2="86"/><line x1="642" y1="28" x2="652" y2="18"/></g></g><polyline id="bolt" points="150,26 120,110 145,118 105,225" fill="none" stroke="#fff" stroke-width="4" opacity="0"/><g id="dust"></g><g id="steam"></g>
-</svg></div>
-<div class="mrow">
+</svg><div class="vig"></div><div id="banner"><span class="stripes"></span><b>EVENT INCOMING</b><i id="banner-s">STAND BY</i></div><div id="obj"><span class="k">PRIMARY OBJECTIVE</span><b id="obj-t">Keep the crew alive</b></div><div id="mwrap">
 <div class="meter" id="m-o2"><div class="top"><span class="ic" style="background:rgba(61,214,245,.15);color:var(--cyan)">💧</span><span style="color:var(--cyan)">OXYGEN</span><span class="val" id="v-o2">6</span></div><div class="bar"><i id="b-o2" style="width:60%;background:var(--cyan)"></i></div></div>
 <div class="meter" id="m-sh"><div class="top"><span class="ic" style="background:rgba(155,93,229,.15);color:var(--purple)">🛡️</span><span style="color:var(--purple)">SHIELD</span><span class="val" id="v-sh">6</span></div><div class="bar"><i id="b-sh" style="width:60%;background:var(--purple)"></i></div></div>
 <div class="meter" id="m-fd"><div class="top"><span class="ic" style="background:rgba(74,222,128,.15);color:var(--green)">🌱</span><span style="color:var(--green)">FOOD</span><span class="val" id="v-fd">6</span></div><div class="bar"><i id="b-fd" style="width:60%;background:var(--green)"></i></div></div>
-</div>
+</div><div id="dialog"><span class="av">📡</span><span class="dt"><b>MISSION CONTROL</b><i id="dlg-t"></i></span></div><div id="crewhud"><div class="cw" id="cw0"><div class="f" id="cf0">😊</div><div class="n">Aarav</div><div class="r">Engineer</div></div><div class="cw" id="cw1"><div class="f" id="cf1">😊</div><div class="n">Meera</div><div class="r">Botanist</div></div><div class="cw" id="cw2"><div class="f" id="cf2">😊</div><div class="n">Kabir</div><div class="r">Medic</div></div></div></div>
+
 <div class="slots">
 <div class="slot" id="slot-o2" data-slot="o2"><div class="nm"><span class="dot" style="background:var(--cyan)"></span>Life Support</div><div class="n" id="n-o2">0</div><div class="hint">keeps the air on</div></div>
 <div class="slot" id="slot-sh" data-slot="sh"><div class="nm"><span class="dot" style="background:var(--purple)"></span>Shield</div><div class="n" id="n-sh">0</div><div class="hint">blocks radiation</div></div>
@@ -190,7 +213,7 @@ footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11
 </div>
 <div class="tray" id="tray"></div>
 <div class="ctr" style="margin-bottom:16px"><button class="btn" id="b-sol" disabled style="opacity:.5">Start the sol</button></div>
-<div class="crew"><div class="cw" id="cw0"><div class="f" id="cf0">😊</div><div class="n">Aarav</div><div class="r">Engineer</div></div><div class="cw" id="cw1"><div class="f" id="cf1">😊</div><div class="n">Meera</div><div class="r">Botanist</div></div><div class="cw" id="cw2"><div class="f" id="cf2">😊</div><div class="n">Kabir</div><div class="r">Medic</div></div></div>
+
 <div class="ctr"><button class="btn ghost" id="b-lab2" style="font-size:13px;padding:9px 18px">NASA Data Lab</button></div>
 <footer>NASA imagery and data are public domain · RezonX Elites · NASA Space Apps Challenge 2026<br>Every number is date-stamped in the Data Lab. Built for kids 7-12.</footer>
 </section>
@@ -259,14 +282,14 @@ if(ev.key==="moxie"){spawnSteam();}
 sfx(ev.storm||ev.key==="flare"||ev.key==="lightning"?"warn":(ev.key==="moxie"?"good":"drop"));
 S.crew.forEach((c,i)=>{if(!c.down)$("astro"+(i+1)).classList.add("astro-live");});
 setTimeout(()=>showEvent(ev,cb),ev.storm?2600:2100);}
-function clearScene(){const sc=$("scene");sc.removeAttribute("data-ev");sc.classList.remove("storm","shake");["dust","steam"].forEach(g=>{const el=document.getElementById(g);if(el)el.innerHTML="";});document.querySelectorAll(".astro-live").forEach(e=>e.classList.remove("astro-live"));}
+function clearScene(){const sc=$("scene");sc.removeAttribute("data-ev");sc.classList.remove("storm","shake");const bn=$("banner"),dg=$("dialog");if(bn)bn.classList.remove("on");if(dg)dg.classList.remove("on");["dust","steam"].forEach(g=>{const el=document.getElementById(g);if(el)el.innerHTML="";});document.querySelectorAll(".astro-live").forEach(e=>e.classList.remove("astro-live"));}
 function spawnDust(devils){const g=$("dust");for(let i=0;i<(devils?3:10);i++){const e=document.createElementNS("http://www.w3.org/2000/svg","ellipse");e.setAttribute("cx",-80-Math.random()*300);e.setAttribute("cy",devils?295-Math.random()*25:288+Math.random()*22);e.setAttribute("rx",devils?15:30+Math.random()*50);e.setAttribute("ry",devils?55:10+Math.random()*8);e.setAttribute("fill",devils?"#c96a2e":"#8a5a24");e.setAttribute("class",devils?"devilp":"dustp");e.setAttribute("opacity",devils?".55":".4");g.appendChild(e);}}
 function spawnSteam(){const g=$("steam");for(let i=0;i<5;i++){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx",295+i*15);c.setAttribute("cy",190);c.setAttribute("r",4+Math.random()*3);c.setAttribute("fill","#7fe3ff");c.setAttribute("class","steamp");c.style.animationDelay=(i*.2)+"s";g.appendChild(c);}}
 function startGame(world,full){const sv=CFG[world];S={world,maxSol:full?5:3,sol:1,m:{o2:6,sh:6,fd:6},remaining:0,budget:sv.budget,placed:{o2:0,sh:0,fd:0},crew:[{n:'Aarav',down:false},{n:'Meera',down:false},{n:'Kabir',down:false}],pendingHelp:0,nbCarry:0,warned:{},log:[],risky:0,shOrbs:0,totOrbs:0,solSnap:null};surpriseDone=false;hintStep=0;$('sun').style.display=world==='mars'?'block':'none';$('moonsvg').style.display=world==='mars'?'none':'block';startSol();show('scr-game');startAlloc();}
 function startSol(){let b=CFG[S.world].budget;if(S.pendingHelp>0){S.pendingHelp=0;b+=2;toast('📡 Help from Earth arrived: +2 power orbs');sfx('good');}b+=(S.nbCarry||0);S.nbCarry=0;S.budget=Math.max(3,b);}
 function snapshot(){S.solSnap=JSON.stringify({m:S.m,crew:S.crew.map(c=>({n:c.n,down:c.down})),budget:S.budget,pendingHelp:S.pendingHelp,nbCarry:S.nbCarry,warned:S.warned,risky:S.risky,shOrbs:S.shOrbs,totOrbs:S.totOrbs,log:S.log});}
 function startAlloc(){phase='alloc';S.placed={o2:0,sh:0,fd:0};S.remaining=S.budget;snapshot();$('scene').classList.remove('storm');draw();
- if(S.sol===1&&!hintShown){hintShown=true;toast('Storms are coming. Put 2 orbs on the SHIELD slot.');}}
+ if(S.sol===1&&!hintShown){hintShown=true;toast('Storms are coming. Put 2 orbs on the SHIELD slot.');}const ob=$("obj-t");if(ob)ob.textContent="Keep the crew alive";}
 function place(slot){if(!S||phase!=='alloc'||S.remaining<=0)return;S.remaining--;S.placed[slot]++;sfx('drop');draw();
  if(S.sol===1&&hintStep===0&&slot==='sh'&&S.placed.sh>=2){hintStep=1;toast('Good. Now feed LIFE SUPPORT so the crew can breathe.');}}
 function runSol(){phase='event';sfx('go');['o2','sh','fd'].forEach(k=>{S.m[k]=clamp(S.m[k]+S.placed[k]);});S.totOrbs+=S.placed.o2+S.placed.sh+S.placed.fd;S.shOrbs+=S.placed.sh;
@@ -276,7 +299,7 @@ function runSol(){phase='event';sfx('go');['o2','sh','fd'].forEach(k=>{S.m[k]=cl
 function showEvent(ev,cb){const st=ev.storm;if(st){$('scene').classList.add('storm');setTimeout(()=>$('scene').classList.add('shake'),150);sfx('warn');}
  const cost=ch=>{const bits=[];['o2','sh','fd'].forEach(k=>{const v=ch.eff[k]||0;if(v)bits.push('<b class="c-'+k+'">'+(v>0?'+':'')+v+' '+k.toUpperCase()+'</b>');});if(ch.nb)bits.push('<b class="c-r">'+(ch.nb>0?'+':'')+ch.nb+' power next sol</b>');return bits.length?'<span class="cost">'+bits.join('')+'</span>':'';};
  let h='<span class="stamp '+ev.cls+'">'+ev.stamp+'</span><h3>'+ev.name+'</h3><div class="fact">'+ev.fact+'</div><div class="narr">'+ev.narr+'</div>';
- S._ev=ev;S._cb=cb;S._evName=ev.name;
+ S._ev=ev;S._cb=cb;S._evName=ev.name;const bn=$("banner");if(bn){$("banner-s").textContent=ev.name.toUpperCase();bn.classList.add("on");$("obj-t").textContent="Survive the "+ev.name;$("dlg-t").textContent=ev.narr;$("dialog").classList.add("on");}
  h+=ev.choices.map((c,i)=>'<button class="chc" data-i="'+i+'">'+c.t+cost(c)+'<span class="cs">'+c.cs+'</span></button>').join('');
  $('ecard').innerHTML=h;$('evov').classList.add('on');}
 $('ecard').addEventListener('click',e=>{const b=e.target.closest('.chc');if(!b||!$('evov').classList.contains('on'))return;const ch=S._ev.choices[+b.dataset.i];const cb=S._cb;$('evov').classList.remove('on');clearScene();sfx('click');resolve(ch,cb);});
