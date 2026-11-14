@@ -143,14 +143,14 @@ footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11
 #obj .k{display:block;font-size:10px;letter-spacing:1.5px;color:#FFC93C;font-weight:800}
 #obj b{display:block;font-size:13px;color:#fff;margin-top:2px;max-width:170px;line-height:1.25}
 #mwrap{position:absolute;top:12px;right:12px;z-index:8;width:220px;display:flex;flex-direction:column;gap:7px;pointer-events:none}
-#mwrap .meter{flex:none;min-width:0;padding:8px 12px;background:rgba(9,12,26,.72);border:2px solid rgba(120,140,190,.35);border-radius:12px;backdrop-filter:blur(4px)}
+#mwrap .meter{flex:none;min-width:0;padding:8px 12px;background:rgba(9,12,26,.88);border:2px solid rgba(120,140,190,.35);border-radius:12px;backdrop-filter:blur(4px)}
 #dialog{position:absolute;left:12px;bottom:64px;z-index:8;display:flex;gap:10px;align-items:center;max-width:330px;background:rgba(9,12,26,.8);border:2px solid rgba(120,140,190,.35);border-radius:14px;padding:9px 12px;opacity:0;transform:translateY(6px);transition:all .3s;pointer-events:none;backdrop-filter:blur(4px)}
 #dialog.on{opacity:1;transform:none}
 #dialog .av{width:34px;height:34px;flex:none;border-radius:10px;background:rgba(61,214,245,.15);display:grid;place-items:center;font-size:17px}
 #dialog .dt b{display:block;font-size:10.5px;letter-spacing:1.2px;color:#3DD6F5}
 #dialog .dt i{display:block;font-style:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;color:#e8edff;line-height:1.35}
 #crewhud{position:absolute;left:12px;bottom:12px;z-index:8;display:flex;gap:6px;pointer-events:none}
-#crewhud .cw{flex:none;min-width:0;width:96px;padding:6px 8px;background:rgba(9,12,26,.72);border:2px solid rgba(120,140,190,.35);border-radius:12px;backdrop-filter:blur(4px);text-align:left}
+#crewhud .cw{flex:none;min-width:0;width:96px;padding:6px 8px;background:rgba(9,12,26,.88);border:2px solid rgba(120,140,190,.35);border-radius:12px;backdrop-filter:blur(4px);text-align:left}
 #crewhud .cw .r{display:none}
 #crewhud .cw .n{font-size:11px;margin-top:2px}
 #crewhud .cw.down{border-color:#ff6b6b}
@@ -299,7 +299,7 @@ function runSol(){phase='event';sfx('go');['o2','sh','fd'].forEach(k=>{S.m[k]=cl
 function showEvent(ev,cb){const st=ev.storm;if(st){$('scene').classList.add('storm');setTimeout(()=>$('scene').classList.add('shake'),150);sfx('warn');}
  const cost=ch=>{const bits=[];['o2','sh','fd'].forEach(k=>{const v=ch.eff[k]||0;if(v)bits.push('<b class="c-'+k+'">'+(v>0?'+':'')+v+' '+k.toUpperCase()+'</b>');});if(ch.nb)bits.push('<b class="c-r">'+(ch.nb>0?'+':'')+ch.nb+' power next sol</b>');return bits.length?'<span class="cost">'+bits.join('')+'</span>':'';};
  let h='<span class="stamp '+ev.cls+'">'+ev.stamp+'</span><h3>'+ev.name+'</h3><div class="fact">'+ev.fact+'</div><div class="narr">'+ev.narr+'</div>';
- S._ev=ev;S._cb=cb;S._evName=ev.name;const bn=$("banner");if(bn){$("banner-s").textContent=ev.name.toUpperCase();bn.classList.add("on");$("obj-t").textContent="Survive the "+ev.name;$("dlg-t").textContent=ev.narr;$("dialog").classList.add("on");}
+ S._ev=ev;S._cb=cb;S._evName=ev.name;const bn=$("banner");if(bn){$("banner-s").textContent=ev.name.toUpperCase();bn.classList.add("on");$("obj-t").textContent=ev.name;$("dlg-t").textContent=ev.narr;$("dialog").classList.add("on");}
  h+=ev.choices.map((c,i)=>'<button class="chc" data-i="'+i+'">'+c.t+cost(c)+'<span class="cs">'+c.cs+'</span></button>').join('');
  $('ecard').innerHTML=h;$('evov').classList.add('on');}
 $('ecard').addEventListener('click',e=>{const b=e.target.closest('.chc');if(!b||!$('evov').classList.contains('on'))return;const ch=S._ev.choices[+b.dataset.i];const cb=S._cb;$('evov').classList.remove('on');clearScene();sfx('click');resolve(ch,cb);});
