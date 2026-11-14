@@ -67,7 +67,7 @@ h1,h2,h3,.btn,.slot .nm{font-family:'Baloo 2',system-ui,sans-serif}
 .slot .n{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
 .slot .hint{color:var(--dim);font-size:11px;margin-top:2px}
 /* event overlay */
-.overlay{position:fixed;inset:0;background:rgba(4,6,14,.72);display:none;place-items:center;z-index:40;padding:16px}
+.overlay{position:fixed;inset:0;background:rgba(4,6,14,.5);display:none;place-items:center;z-index:40;padding:16px}
 .overlay.on{display:grid}
 .ecard{max-width:460px;width:100%;background:var(--panel);border:3px solid var(--line);border-radius:22px;padding:22px;animation:pop .35s ease both;max-height:88vh;overflow:auto}
 @keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
@@ -107,6 +107,31 @@ h1,h2,h3,.btn,.slot .nm{font-family:'Baloo 2',system-ui,sans-serif}
 .count{font-variant-numeric:tabular-nums;font-size:15px;margin:6px 0 14px;color:var(--dim)}
 footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11.5px;line-height:1.6}
 @media(max-width:640px){.wcard{width:100%}.crew .cw{min-width:72px}}
+/* live event scenes */
+#scene[data-ev=dust] #skyrect,#scene[data-ev=devils] #skyrect{animation:skydust 2.2s forwards}
+#scene[data-ev=night] #skyrect{animation:skydark 2.2s forwards}
+#scene[data-ev=dust] #panels{opacity:.3;transition:opacity 2s}
+#scene[data-ev=dust] #sun{opacity:.3;transition:opacity 2s}
+@keyframes skydust{to{fill:#6e441c}}
+@keyframes skydark{to{fill:#04060e}}
+#scene[data-ev=flare]::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 78% 15%,rgba(255,90,60,.5),transparent 70%);animation:flr .5s 5 alternate;pointer-events:none}
+@keyframes flr{from{opacity:.25}to{opacity:.95}}
+#scene[data-ev=flare] #sun{animation:sunp .5s 5 alternate}
+@keyframes sunp{to{filter:brightness(1.9) saturate(2)}}
+#scene[data-ev=lightning]::after{content:"";position:absolute;inset:0;background:#fff;opacity:0;animation:lf .18s 4;pointer-events:none}
+@keyframes lf{0%,100%{opacity:0}50%{opacity:.5}}
+#scene[data-ev=lightning] #bolt{animation:bf .18s 4}
+@keyframes bf{0%,100%{opacity:0}50%{opacity:1}}
+#scene[data-ev=gannon]::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,rgba(155,93,229,.4),rgba(255,90,95,.18) 60%,transparent);animation:aur 2s infinite alternate;pointer-events:none}
+@keyframes aur{from{transform:translateY(-8px);opacity:.55}to{transform:translateY(8px);opacity:1}}
+@keyframes dustdrift{from{transform:translateX(-140px)}to{transform:translateX(940px)}}
+.dustp{animation:dustdrift 2.6s linear infinite}
+@keyframes devildrift{from{transform:translateX(-100px)}to{transform:translateX(940px)}}
+.devilp{animation:devildrift 5.5s linear infinite}
+@keyframes steamup{from{opacity:.75;transform:translateY(0)}to{opacity:0;transform:translateY(-48px)}}
+.steamp{animation:steamup 1.8s infinite}
+@keyframes jit{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.astro-live{animation:jit .45s infinite}
 </style></head><body><div class="stars"></div><div class="wrap">
 <!-- TITLE -->
 <section id="scr-title" class="scr active"><div class="kick">RezonX Elites · NASA Space Apps 2026</div>
@@ -137,9 +162,9 @@ footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11
 <div class="scene" id="scene">
 <svg viewBox="0 0 800 340" id="scene-svg" aria-hidden="true">
 <defs><radialGradient id="glowY" cx="50%" cy="45%"><stop offset="0%" stop-color="#FFC93C" stop-opacity=".85"/><stop offset="100%" stop-color="#FFC93C" stop-opacity="0"/></radialGradient><radialGradient id="glowG" cx="50%" cy="55%"><stop offset="0%" stop-color="#4ADE80" stop-opacity=".8"/><stop offset="100%" stop-color="#4ADE80" stop-opacity="0"/></radialGradient><radialGradient id="glowC" cx="50%" cy="40%"><stop offset="0%" stop-color="#3DD6F5" stop-opacity=".75"/><stop offset="100%" stop-color="#3DD6F5" stop-opacity="0"/></radialGradient></defs>
-<rect x="0" y="0" width="800" height="340" fill="#0d1330"/>
+<rect id="skyrect" x="0" y="0" width="800" height="340" fill="#0d1330"/>
 <g fill="#fff" opacity=".6"><circle cx="60" cy="40" r="1.6"/><circle cx="140" cy="70" r="1.2"/><circle cx="220" cy="30" r="1.4"/><circle cx="320" cy="55" r="1.1"/><circle cx="420" cy="25" r="1.5"/><circle cx="520" cy="60" r="1.2"/><circle cx="620" cy="35" r="1.4"/><circle cx="700" cy="65" r="1.2"/><circle cx="760" cy="25" r="1.5"/><circle cx="100" cy="110" r="1"/><circle cx="500" cy="95" r="1"/><circle cx="650" cy="105" r="1"/></g>
-<ellipse cx="620" cy="52" rx="26" ry="26" fill="#e8e4d8" opacity=".9"/><ellipse cx="610" cy="47" rx="20" ry="20" fill="#cfc9b8"/><ellipse cx="640" cy="66" rx="8" ry="6" fill="#cfc9b8"/>
+<g id="moonsvg"><ellipse cx="620" cy="52" rx="26" ry="26" fill="#e8e4d8" opacity=".9"/><ellipse cx="610" cy="47" rx="20" ry="20" fill="#cfc9b8"/><ellipse cx="640" cy="66" rx="8" ry="6" fill="#cfc9b8"/></g>
 <rect x="0" y="250" width="800" height="90" fill="#8a3a12"/><path d="M0 250 Q200 238 400 252 T800 248 L800 340 L0 340 Z" fill="#a34616"/>
 <ellipse cx="120" cy="300" rx="26" ry="9" fill="#6f2e0f"/><ellipse cx="720" cy="315" rx="20" ry="7" fill="#6f2e0f"/><ellipse cx="400" cy="322" rx="15" ry="6" fill="#6f2e0f"/>
 <g id="panels"><rect x="58" y="176" width="88" height="30" rx="6" transform="rotate(-14 102 191)" fill="#2b3d78" stroke="#4a5fa8" stroke-width="3"/><rect x="66" y="212" width="88" height="30" rx="6" transform="rotate(-14 110 227)" fill="#2b3d78" stroke="#4a5fa8" stroke-width="3"/><rect x="70" y="196" width="20" height="10" fill="#FFC93C" opacity=".9" transform="rotate(-14 80 201)"/></g>
@@ -151,6 +176,7 @@ footer{margin-top:26px;text-align:center;color:var(--faint,#5d6678);font-size:11
 <g id="astro1"><circle cx="200" cy="266" r="13" fill="#fff" stroke="#d9c9b8" stroke-width="2"/><circle cx="200" cy="261" r="6.5" fill="#7fd4ff"/><rect x="193" y="277" width="14" height="18" rx="6" fill="#fff" stroke="#d9c9b8" stroke-width="2"/></g>
 <g id="astro2"><circle cx="452" cy="270" r="12" fill="#fff" stroke="#d9c9b8" stroke-width="2"/><circle cx="452" cy="265" r="6" fill="#ffb0b0"/><rect x="446" y="280" width="12" height="16" rx="5" fill="#fff" stroke="#d9c9b8" stroke-width="2"/></g>
 <g id="astro3"><circle cx="680" cy="262" r="11" fill="#fff" stroke="#d9c9b8" stroke-width="2"/><circle cx="680" cy="258" r="5.5" fill="#b7f0c8"/><rect x="675" y="272" width="11" height="15" rx="5" fill="#fff" stroke="#d9c9b8" stroke-width="2"/></g>
+<g id="sun"><circle cx="618" cy="52" r="22" fill="#FFD27D"/><g stroke="#FFD27D" stroke-width="2.5" opacity=".7"><line x1="618" y1="18" x2="618" y2="4"/><line x1="618" y1="86" x2="618" y2="100"/><line x1="584" y1="52" x2="570" y2="52"/><line x1="652" y1="52" x2="666" y2="52"/><line x1="594" y1="28" x2="584" y2="18"/><line x1="642" y1="76" x2="652" y2="86"/><line x1="594" y1="76" x2="584" y2="86"/><line x1="642" y1="28" x2="652" y2="18"/></g></g><polyline id="bolt" points="150,26 120,110 145,118 105,225" fill="none" stroke="#fff" stroke-width="4" opacity="0"/><g id="dust"></g><g id="steam"></g>
 </svg></div>
 <div class="mrow">
 <div class="meter" id="m-o2"><div class="top"><span class="ic" style="background:rgba(61,214,245,.15);color:var(--cyan)">💧</span><span style="color:var(--cyan)">OXYGEN</span><span class="val" id="v-o2">6</span></div><div class="bar"><i id="b-o2" style="width:60%;background:var(--cyan)"></i></div></div>
@@ -196,27 +222,27 @@ const CFG={moon:{budget:6,drain:{o2:2,fd:2,sh:0},name:'Moon'},mars:{budget:5,dra
 const LBL={o2:'oxygen',sh:'shield',fd:'food'};
 const DECK={
 moon:[
- {name:'The lunar night is coming',stamp:'REAL · A LUNAR NIGHT LASTS 14 EARTH DAYS',cls:'calm',fact:'On the Moon, one night lasts about 14 Earth days. Solar panels make nothing in the dark, so batteries are life.',narr:'Mission Control: "Batteries charged. Night falls in hours."',
+ {key:'night',name:'The lunar night is coming',stamp:'REAL · A LUNAR NIGHT LASTS 14 EARTH DAYS',cls:'calm',fact:'On the Moon, one night lasts about 14 Earth days. Solar panels make nothing in the dark, so batteries are life.',narr:'Mission Control: "Batteries charged. Night falls in hours."',
   choices:[{t:'Top up every battery',cs:'Steady and ready.',eff:{},nb:0},{t:'Skip the batteries, feed the greenhouse',cs:'Bold. The night will test that choice.',eff:{fd:1},nb:-1,risky:1}]},
- {name:'Lightning hits the launcher',stamp:'REAL · APOLLO 12 · NOV 14 1969',cls:'',fact:'Lightning struck Apollo 12 twice at launch. The crew flipped switches from memory and kept flying.',narr:'Crack! Power flickers across the outpost.',
+ {key:'lightning',name:'Lightning hits the launcher',stamp:'REAL · APOLLO 12 · NOV 14 1969',cls:'',fact:'Lightning struck Apollo 12 twice at launch. The crew flipped switches from memory and kept flying.',narr:'Crack! Power flickers across the outpost.',
   choices:[{t:'Reroute power to the shield',cs:'Shield up, air strained.',eff:{sh:2,o2:-1}},{t:'Ride it out, like Apollo 12 did',cs:'Risky, but bold.',eff:{o2:-1,sh:-1},risky:1},{t:'Call Earth for help',cs:'Ground control is close. Help lands instantly.',eff:{o2:1,sh:1},help:'now'}]},
- {name:'The Gannon storm',stamp:'REAL · MAY 10-11 2024',cls:'',storm:1,fact:'The strongest geomagnetic storm in 20 years lit skies around the world and scrambled satellites.',narr:'The sky burns. Every radio crackles.',
+ {key:'gannon',name:'The Gannon storm',stamp:'REAL · MAY 10-11 2024',cls:'',storm:1,fact:'The strongest geomagnetic storm in 20 years lit skies around the world and scrambled satellites.',narr:'The sky burns. Every radio crackles.',
   choices:[{t:'Full shield, lights low',cs:'You weathered it. The greenhouse paid the bill.',eff:{sh:2,fd:-1}},{t:'Burn every spare orb into the shield',cs:'Big swing, big cost.',eff:{sh:3,o2:-2},risky:1}]}],
 mars:[
- {name:'Dust devils scout the site',stamp:'REAL · JEZERO CRATER',cls:'calm',fact:'Perseverance has filmed dust devils wandering Jezero crater. Small ones are harmless. Big ones are not.',narr:'Twisters of red dust wander past the fence.',
+ {key:'devils',name:'Dust devils scout the site',stamp:'REAL · JEZERO CRATER',cls:'calm',fact:'Perseverance has filmed dust devils wandering Jezero crater. Small ones are harmless. Big ones are not.',narr:'Twisters of red dust wander past the fence.',
   choices:[{t:'Bring the panels in early',cs:'Power saved for tomorrow.',eff:{},nb:1},{t:'Keep the panels out, breathe easy tonight',cs:'More air now, dust on the panels later.',eff:{o2:1},nb:-1,risky:1}]},
- {name:'A global dust storm builds',stamp:'REAL · JUNE 2018',cls:'',fact:'In June 2018 a planet-encircling dust storm blocked the Sun for months. It ended the Opportunity rover.',narr:'The horizon disappears. The sky goes brown.',
+ {key:'dust',name:'A global dust storm builds',stamp:'REAL · JUNE 2018',cls:'',fact:'In June 2018 a planet-encircling dust storm blocked the Sun for months. It ended the Opportunity rover.',narr:'The horizon disappears. The sky goes brown.',
   choices:[{t:'Seal up and wait',cs:'Safe inside. The plants will sulk.',eff:{sh:-1,fd:-1}},{t:'Run the panels hard anyway',cs:'Air now, dark tomorrow.',eff:{o2:-1},nb:-1,risky:1},{t:'Call Earth for help',cs:'A message leaves for Earth. It takes a sol to arrive.',help:'sol'}]},
- {name:'X-class solar flare',stamp:'REAL · X9.3 · SEP 6 2017',cls:'',storm:1,fact:'The X9.3 flare of September 6, 2017 was the largest of its solar cycle. Its radiation arrives in minutes.',narr:'The Sun lashes out. Alarms everywhere.',
+ {key:'flare',name:'X-class solar flare',stamp:'REAL · X9.3 · SEP 6 2017',cls:'',storm:1,fact:'The X9.3 flare of September 6, 2017 was the largest of its solar cycle. Its radiation arrives in minutes.',narr:'The Sun lashes out. Alarms everywhere.',
   choices:[{t:'Everyone into the shielded hub',cs:'Radiation weathered. Air and food took the hit.',eff:{sh:1,o2:-1,fd:-1}},{t:'Full power to the shield, nothing held back',cs:'Huge shield. Huge cost.',eff:{sh:3,o2:-2},risky:1},{t:'Call Earth for help',cs:'A message leaves for Earth. It takes a sol to arrive.',help:'sol'}]}],
-any:[{name:'MOXIE makes oxygen',stamp:'REAL · APR 20 2021',cls:'good',fact:'MOXIE split Martian air into oxygen, the first time humans made oxygen on another planet.',narr:'The electrolyser hums. Fresh air!',choices:[{t:'Bank it for the crew',cs:'+2 oxygen.',eff:{o2:2}}]}]};
+any:[{key:'moxie',name:'MOXIE makes oxygen',stamp:'REAL · APR 20 2021',cls:'good',fact:'MOXIE split Martian air into oxygen, the first time humans made oxygen on another planet.',narr:'The electrolyser hums. Fresh air!',choices:[{t:'Bank it for the crew',cs:'+2 oxygen.',eff:{o2:2}}]}]};
 let S=null,phase='alloc',curChoices=[],pendingWorld=null,muted=false,surpriseDone=false,hintShown=false,hintStep=0,drag=null,selected=null,AC=null;
 const $=id=>document.getElementById(id);
 const clamp=v=>Math.max(0,Math.min(10,v));
 const disp=k=>clamp(S.m[k]+(phase==='alloc'?S.placed[k]:0));
 function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);}
 function toast(msg,warn){const t=document.createElement('div');t.className='toast'+(warn?' warn':'');t.textContent=msg;$('toast').appendChild(t);setTimeout(()=>t.remove(),3800);}
-function sfx(k){if(muted)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;const seq={click:[[880,.06]],drop:[[660,.09]],warn:[[220,.14],[220,.14]],good:[[523,.09],[659,.09],[784,.16]],go:[[440,.08]]}[k]||[[440,.06]];let o=0;seq.forEach(p=>{const os=AC.createOscillator(),g=AC.createGain();os.type='sine';os.frequency.value=p[0];g.gain.setValueAtTime(.12,t+o);g.gain.exponentialRampToValueAtTime(.001,t+o+p[1]);os.connect(g);g.connect(AC.destination);os.start(t+o);os.stop(t+o+p[1]);o+=p[1];});}catch(e){}}
+function sfx(k){if(muted)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;const seq={click:[[880,.06]],drop:[[660,.09]],warn:[[220,.14],[220,.14]],good:[[523,.09],[659,.09],[784,.16]],go:[[440,.08]],rumble:[[55,1.1]]}[k]||[[440,.06]];let o=0;seq.forEach(p=>{const os=AC.createOscillator(),g=AC.createGain();os.type='sine';os.frequency.value=p[0];g.gain.setValueAtTime(.12,t+o);g.gain.exponentialRampToValueAtTime(.001,t+o+p[1]);os.connect(g);g.connect(AC.destination);os.start(t+o);os.stop(t+o+p[1]);o+=p[1];});}catch(e){}}
 function draw(){if(!S)return;const c=CFG[S.world];
  $('dial').textContent='Sol '+S.sol+' / '+S.maxSol;$('dl').style.width=((S.maxSol-S.sol+1)/S.maxSol*100)+'%';
  $('transit').classList.toggle('on',S.pendingHelp>0);
@@ -227,7 +253,16 @@ function draw(){if(!S)return;const c=CFG[S.world];
  $('b-sol').disabled=S.remaining>0;$('b-sol').style.opacity=S.remaining>0?'.5':'1';
  S.crew.forEach((c,i)=>{const el=$('cw'+i),f=$('cf'+i);el.classList.toggle('down',c.down);if(c.down){f.textContent='😵';}else{const w=Math.min(disp('o2'),disp('sh'),disp('fd'));f.textContent=w>=5?'😊':(w>=3?'😟':'🤒');}});
 }
-function startGame(world,full){const sv=CFG[world];S={world,maxSol:full?5:3,sol:1,m:{o2:6,sh:6,fd:6},remaining:0,budget:sv.budget,placed:{o2:0,sh:0,fd:0},crew:[{n:'Aarav',down:false},{n:'Meera',down:false},{n:'Kabir',down:false}],pendingHelp:0,nbCarry:0,warned:{},log:[],risky:0,shOrbs:0,totOrbs:0,solSnap:null};surpriseDone=false;startSol();show('scr-game');startAlloc();}
+function playScene(ev,cb){S._ev=ev;$("scene").dataset.ev=ev.key||"";const sc=$("scene");if(ev.storm){sc.classList.add("storm");}
+if(ev.key==="dust"||ev.key==="devils"){spawnDust(ev.key==="devils");}
+if(ev.key==="moxie"){spawnSteam();}
+sfx(ev.storm||ev.key==="flare"||ev.key==="lightning"?"warn":(ev.key==="moxie"?"good":"drop"));
+S.crew.forEach((c,i)=>{if(!c.down)$("astro"+(i+1)).classList.add("astro-live");});
+setTimeout(()=>showEvent(ev,cb),ev.storm?2600:2100);}
+function clearScene(){const sc=$("scene");sc.removeAttribute("data-ev");sc.classList.remove("storm","shake");["dust","steam"].forEach(g=>{const el=document.getElementById(g);if(el)el.innerHTML="";});document.querySelectorAll(".astro-live").forEach(e=>e.classList.remove("astro-live"));}
+function spawnDust(devils){const g=$("dust");for(let i=0;i<(devils?3:10);i++){const e=document.createElementNS("http://www.w3.org/2000/svg","ellipse");e.setAttribute("cx",-80-Math.random()*300);e.setAttribute("cy",devils?295-Math.random()*25:288+Math.random()*22);e.setAttribute("rx",devils?15:30+Math.random()*50);e.setAttribute("ry",devils?55:10+Math.random()*8);e.setAttribute("fill",devils?"#c96a2e":"#8a5a24");e.setAttribute("class",devils?"devilp":"dustp");e.setAttribute("opacity",devils?".55":".4");g.appendChild(e);}}
+function spawnSteam(){const g=$("steam");for(let i=0;i<5;i++){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx",295+i*15);c.setAttribute("cy",190);c.setAttribute("r",4+Math.random()*3);c.setAttribute("fill","#7fe3ff");c.setAttribute("class","steamp");c.style.animationDelay=(i*.2)+"s";g.appendChild(c);}}
+function startGame(world,full){const sv=CFG[world];S={world,maxSol:full?5:3,sol:1,m:{o2:6,sh:6,fd:6},remaining:0,budget:sv.budget,placed:{o2:0,sh:0,fd:0},crew:[{n:'Aarav',down:false},{n:'Meera',down:false},{n:'Kabir',down:false}],pendingHelp:0,nbCarry:0,warned:{},log:[],risky:0,shOrbs:0,totOrbs:0,solSnap:null};surpriseDone=false;hintStep=0;$('sun').style.display=world==='mars'?'block':'none';$('moonsvg').style.display=world==='mars'?'none':'block';startSol();show('scr-game');startAlloc();}
 function startSol(){let b=CFG[S.world].budget;if(S.pendingHelp>0){S.pendingHelp=0;b+=2;toast('📡 Help from Earth arrived: +2 power orbs');sfx('good');}b+=(S.nbCarry||0);S.nbCarry=0;S.budget=Math.max(3,b);}
 function snapshot(){S.solSnap=JSON.stringify({m:S.m,crew:S.crew.map(c=>({n:c.n,down:c.down})),budget:S.budget,pendingHelp:S.pendingHelp,nbCarry:S.nbCarry,warned:S.warned,risky:S.risky,shOrbs:S.shOrbs,totOrbs:S.totOrbs,log:S.log});}
 function startAlloc(){phase='alloc';S.placed={o2:0,sh:0,fd:0};S.remaining=S.budget;snapshot();$('scene').classList.remove('storm');draw();
@@ -237,14 +272,14 @@ function place(slot){if(!S||phase!=='alloc'||S.remaining<=0)return;S.remaining--
 function runSol(){phase='event';sfx('go');['o2','sh','fd'].forEach(k=>{S.m[k]=clamp(S.m[k]+S.placed[k]);});S.totOrbs+=S.placed.o2+S.placed.sh+S.placed.fd;S.shOrbs+=S.placed.sh;
  const dr=CFG[S.world].drain;S.m.o2=clamp(S.m.o2-dr.o2);S.m.fd=clamp(S.m.fd-dr.fd);S.m.sh=clamp(S.m.sh-dr.sh);draw();
  const ev=DECK[S.world][Math.min(S.sol,3)-1];
- showEvent(ev,()=>{if(S.sol===2&&!surpriseDone&&Math.random()<0.3){surpriseDone=true;showEvent(DECK.any[0],afterMain);}else{afterMain();}});}
+ playScene(ev,()=>{if(S.sol===2&&!surpriseDone&&Math.random()<0.3){surpriseDone=true;playScene(DECK.any[0],afterMain);}else{afterMain();}});}
 function showEvent(ev,cb){const st=ev.storm;if(st){$('scene').classList.add('storm');setTimeout(()=>$('scene').classList.add('shake'),150);sfx('warn');}
  const cost=ch=>{const bits=[];['o2','sh','fd'].forEach(k=>{const v=ch.eff[k]||0;if(v)bits.push('<b class="c-'+k+'">'+(v>0?'+':'')+v+' '+k.toUpperCase()+'</b>');});if(ch.nb)bits.push('<b class="c-r">'+(ch.nb>0?'+':'')+ch.nb+' power next sol</b>');return bits.length?'<span class="cost">'+bits.join('')+'</span>':'';};
  let h='<span class="stamp '+ev.cls+'">'+ev.stamp+'</span><h3>'+ev.name+'</h3><div class="fact">'+ev.fact+'</div><div class="narr">'+ev.narr+'</div>';
  S._cb=cb;S._evName=ev.name;
  h+=ev.choices.map((c,i)=>'<button class="chc" data-i="'+i+'">'+c.t+cost(c)+'<span class="cs">'+c.cs+'</span></button>').join('');
  $('ecard').innerHTML=h;$('evov').classList.add('on');}
-$('ecard').addEventListener('click',e=>{const b=e.target.closest('.chc');if(!b||!$('evov').classList.contains('on'))return;const ch=curChoices[+b.dataset.i];const cb=S._cb;$('evov').classList.remove('on');$('scene').classList.remove('storm','shake');sfx('click');resolve(ch,cb);});
+$('ecard').addEventListener('click',e=>{const b=e.target.closest('.chc');if(!b||!$('evov').classList.contains('on'))return;const ch=curChoices[+b.dataset.i];const cb=S._cb;$('evov').classList.remove('on');clearScene();sfx('click');resolve(ch,cb);});
 function resolve(ch,cb){['o2','sh','fd'].forEach(k=>{if(ch.eff&&ch.eff[k])S.m[k]=clamp(S.m[k]+ch.eff[k]);});
  if(ch.nb)S.nbCarry=(S.nbCarry||0)+(ch.nb);if(ch.help==='now'){S.m.o2=clamp(S.m.o2+1);S.m.sh=clamp(S.m.sh+1);toast('🛰️ Ground control helps instantly: +1 air, +1 shield');}
  if(ch.help==='sol'){S.pendingHelp=1;toast('📡 Message sent to Earth. It arrives next sol.');}
