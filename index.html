@@ -276,10 +276,10 @@ function runSol(){phase='event';sfx('go');['o2','sh','fd'].forEach(k=>{S.m[k]=cl
 function showEvent(ev,cb){const st=ev.storm;if(st){$('scene').classList.add('storm');setTimeout(()=>$('scene').classList.add('shake'),150);sfx('warn');}
  const cost=ch=>{const bits=[];['o2','sh','fd'].forEach(k=>{const v=ch.eff[k]||0;if(v)bits.push('<b class="c-'+k+'">'+(v>0?'+':'')+v+' '+k.toUpperCase()+'</b>');});if(ch.nb)bits.push('<b class="c-r">'+(ch.nb>0?'+':'')+ch.nb+' power next sol</b>');return bits.length?'<span class="cost">'+bits.join('')+'</span>':'';};
  let h='<span class="stamp '+ev.cls+'">'+ev.stamp+'</span><h3>'+ev.name+'</h3><div class="fact">'+ev.fact+'</div><div class="narr">'+ev.narr+'</div>';
- S._cb=cb;S._evName=ev.name;
+ S._ev=ev;S._cb=cb;S._evName=ev.name;
  h+=ev.choices.map((c,i)=>'<button class="chc" data-i="'+i+'">'+c.t+cost(c)+'<span class="cs">'+c.cs+'</span></button>').join('');
  $('ecard').innerHTML=h;$('evov').classList.add('on');}
-$('ecard').addEventListener('click',e=>{const b=e.target.closest('.chc');if(!b||!$('evov').classList.contains('on'))return;const ch=curChoices[+b.dataset.i];const cb=S._cb;$('evov').classList.remove('on');clearScene();sfx('click');resolve(ch,cb);});
+$('ecard').addEventListener('click',e=>{const b=e.target.closest('.chc');if(!b||!$('evov').classList.contains('on'))return;const ch=S._ev.choices[+b.dataset.i];const cb=S._cb;$('evov').classList.remove('on');clearScene();sfx('click');resolve(ch,cb);});
 function resolve(ch,cb){['o2','sh','fd'].forEach(k=>{if(ch.eff&&ch.eff[k])S.m[k]=clamp(S.m[k]+ch.eff[k]);});
  if(ch.nb)S.nbCarry=(S.nbCarry||0)+(ch.nb);if(ch.help==='now'){S.m.o2=clamp(S.m.o2+1);S.m.sh=clamp(S.m.sh+1);toast('🛰️ Ground control helps instantly: +1 air, +1 shield');}
  if(ch.help==='sol'){S.pendingHelp=1;toast('📡 Message sent to Earth. It arrives next sol.');}
